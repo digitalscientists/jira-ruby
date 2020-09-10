@@ -44,6 +44,7 @@ require 'jira/request_client'
 require 'jira/oauth_client'
 require 'jira/http_client'
 require 'jira/jwt_client'
+require 'jira/access_token_client'
 require 'jira/client'
 
 require 'jira/railtie' if defined?(Rails)
