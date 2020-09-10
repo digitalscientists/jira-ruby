@@ -90,7 +90,8 @@ module JIRA
       :cert_path,
       :key_path,
       :ssl_client_cert,
-      :ssl_client_key
+      :ssl_client_key,
+      :access_token,
     ].freeze
 
     DEFAULT_OPTIONS = {
