@@ -127,6 +127,8 @@ module JIRA
         @consumer = @request_client.consumer
       when :jwt
         @request_client = JwtClient.new(@options)
+      when :access_token
+        @request_client = AccessTokenClient.new(@options)
       when :basic
         @request_client = HttpClient.new(@options)
       when :cookie
