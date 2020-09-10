@@ -102,7 +102,8 @@ module JIRA
       use_client_cert: false,
       auth_type: :oauth,
       http_debug: false,
-      default_headers: {}
+      default_headers: {},
+      access_token: nil
     }.freeze
 
     def initialize(options = {})
