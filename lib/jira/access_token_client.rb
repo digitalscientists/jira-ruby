@@ -4,7 +4,7 @@ require 'uri'
 module JIRA
   class AccessTokenClient < RequestClient
     DEFAULT_OPTIONS = {
-      access_token
+      access_token: nil
     }.freeze
 
     attr_reader :options
