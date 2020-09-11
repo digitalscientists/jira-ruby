@@ -11,7 +11,7 @@ module JIRA
 
     def initialize(options)
       @options = DEFAULT_OPTIONS.merge(options)
-      @headers = { 'Authorization' => "Bearer #{@options[:access_token].to_s}" }
+      @headers = { 'Authorization' => "Bearer #{@options[:access_token]}" }
     end
 
     def make_request(http_method, url, body = '', headers = {})
@@ -30,14 +30,14 @@ module JIRA
       execute_request(request)
     end
 
+    def access_token_http_conn
+      http_conn(uri)
+    end
+
     def http_conn(uri)
       http_class = Net::HTTP
       http_conn = http_class.new(uri.host, uri.port)
       http_conn.use_ssl = @options[:use_ssl]
-      if @options[:use_client_cert]
-        http_conn.cert = @options[:ssl_client_cert]
-        http_conn.key = @options[:ssl_client_key]
-      end
       http_conn.verify_mode = @options[:ssl_verify_mode]
       http_conn.ssl_version = @options[:ssl_version] if @options[:ssl_version]
       http_conn.read_timeout = @options[:read_timeout]
@@ -55,7 +55,7 @@ module JIRA
     private
 
     def execute_request(request)
-      response = http_conn.request(request)
+      response = access_token_http_conn.request(request)
       @authenticated = response.is_a? Net::HTTPOK
 
       response
